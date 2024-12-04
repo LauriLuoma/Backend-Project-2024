@@ -1,9 +1,9 @@
 /** This is a simple database for the "Learn Words"-app" */
 
+// Importing the necessary modules
 const sqlite3 = require("sqlite3").verbose();
-const express = require("express");
-const path = require("path");
 
+// Creating a new SQLite database in memory
 const db = new sqlite3.Database(":memory:", (err) => {
   if (err) {
     return console.error(
@@ -13,10 +13,25 @@ const db = new sqlite3.Database(":memory:", (err) => {
   }
   console.log("Connected to the in-memory SQlite database.");
 
+  // Creating a new table called "words" with columns for English, Finnish, Swedish and tags
   db.serialize(() => {
     db.run(
-      "CREATE TABLE words (id INTEGER PRIMARY KEY, english TEXT, finnish TEXT, swedish TEXT, tags TEXT)",
+      `CREATE TABLE IF NOT EXISTS words (
+      id INTEGER PRIMARY KEY,
+      english TEXT NOT NULL,
+      finnish TEXT NOT NULL,
+      swedish TEXT NOT NULL,
+      tags TEXT
+      )`,
+      (err) => {
+        if (err) {
+          return console.error("Error creating table: ", err.message);
+        }
+        console.log("Created the table 'words'.");
+      },
     );
+
+    // Inserting some base data into the table
     const stmt = db.prepare(
       "INSERT INTO words (english, finnish, swedish, tags) VALUES (?, ?, ?, ?)",
     );
@@ -45,5 +60,29 @@ const db = new sqlite3.Database(":memory:", (err) => {
     stmt.run("plane", "lentokone", "flygplan", "vehicles");
 
     stmt.finalize();
+
+    console.log("Inserted some base data into the table 'words'.");
   });
 });
+
+//Different queries for the database
+
+/*
+  Get all words from the database
+*/
+const getAllWords = async () => {
+  const query = `SELECT * FROM words ORDER BY id`;
+  return new Promise((resolve, reject) => {
+    db.all(query, (err, results) => {
+      if (err) {
+        reject("Error recievig all words", err);
+      } else if (results.length === 0) {
+        reject("No words found in the database");
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+
+module.exports = { db, getAllWords };
