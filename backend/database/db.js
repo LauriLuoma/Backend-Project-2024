@@ -65,24 +65,4 @@ const db = new sqlite3.Database(":memory:", (err) => {
   });
 });
 
-//Different queries for the database
-
-/*
-  Get all words from the database
-*/
-const getAllWords = async () => {
-  const query = `SELECT * FROM words ORDER BY id`;
-  return new Promise((resolve, reject) => {
-    db.all(query, (err, results) => {
-      if (err) {
-        reject("Error recievig all words", err);
-      } else if (results.length === 0) {
-        reject("No words found in the database");
-      } else {
-        resolve(results);
-      }
-    });
-  });
-};
-
-module.exports = { db, getAllWords };
+module.exports = db;
