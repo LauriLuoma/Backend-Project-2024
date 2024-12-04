@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const db = require("./database/db");
+const wordRoutes = require("./routes/wordRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,13 +12,10 @@ app.get("/", (req, res) => {
   res.send("Learn Words API");
 });
 
-app.get("/api/words", async (req, res) => {
-  try {
-    const words = await db.getAllWords();
-    res.json(words);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+app.use("/api", wordRoutes);
+
+app.use((req, res) => {
+  res.status(404).send({ error: "Not found" });
 });
 
 app.listen(port, () => {
