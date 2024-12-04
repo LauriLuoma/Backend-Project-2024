@@ -34,7 +34,7 @@ const deleteWord = async (id) => {
   });
 };
 
-//Function to add a new word to the database
+// Function to add a new word to the database
 // The function takes in the English, Finnish and Swedish translations of the word, as well as the tags
 // The translations are required, so they cannot be empty
 // The tags are not required, so they can be empty
@@ -53,4 +53,22 @@ const addWord = async (engTrans, finTrans, sweTrans, tags) => {
   });
 };
 
-module.exports = { getAllWords, deleteWord, addWord };
+// Function to update a word in the database
+// The fuction takes in the id of the word and the new translations and tags
+// The translations are required, tags are not
+const updateWord = async (id, engTrans, finTrans, sweTrans, tags) => {
+  const query = `UPDATE words SET english = ?, finnish = ?, swedish = ?, tags = ? WHERE id = ?`;
+  return new Promise((resolve, reject) => {
+    db.run(query, [engTrans, finTrans, sweTrans, tags, id], (err) => {
+      if (err) {
+        reject("Error updating the word", err);
+      } else {
+        resolve({
+          message: `Word with id ${id} updated`,
+        });
+      }
+    });
+  });
+};
+
+module.exports = { getAllWords, deleteWord, addWord, updateWord };
