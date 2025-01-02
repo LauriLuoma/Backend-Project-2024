@@ -23,7 +23,7 @@ function Navbar() {
     }}>
       <div style={{ display: 'flex', gap: '20px' }}>
         <Link to="/" style={linkStyle('/')}>Learn!</Link>
-        <Link to="/time-tracking" style={linkStyle('/admin')}>Admin</Link>
+        <Link to="/admin" style={linkStyle('/admin')}>Admin</Link>
       </div>
     </nav>
   );
