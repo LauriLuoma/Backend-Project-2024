@@ -18,6 +18,21 @@ const getAllWords = async () => {
   });
 };
 
+const getWordsByTag = async (tag) => {
+  const query = `SELECT * FROM words WHERE tags = ? ORDER BY id`;
+  return new Promise((resolve, reject) => {
+    db.all(query, [tag], (err, results) => {
+      if (err) {
+        reject("Error recieving words by tag", err);
+      } else if (results.length === 0) {
+        reject(`No words found with tag ${tag}`);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+
 // Function to delete a word from the database
 const deleteWord = async (id) => {
   const query = `DELETE FROM words WHERE id = ?`;
@@ -71,4 +86,10 @@ const updateWord = async (id, engTrans, finTrans, sweTrans, tags) => {
   });
 };
 
-module.exports = { getAllWords, deleteWord, addWord, updateWord };
+module.exports = {
+  getAllWords,
+  deleteWord,
+  addWord,
+  updateWord,
+  getWordsByTag,
+};
