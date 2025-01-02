@@ -2,10 +2,16 @@ const express = require("express");
 const router = express.Router();
 const wordController = require("../controllers/wordController");
 
-// Route for all words
-router.get("/words", async (req, res) => {
+// Route for all words or words by tag
+router.get("/words/:tag?", async (req, res) => {
   try {
-    const words = await wordController.getAllWords();
+    const tag = req.params.tag;
+    let words;
+    if (tag) {
+      words = await wordController.getWordsByTag(tag);
+    } else {
+      words = await wordController.getAllWords();
+    }
     res.json(words);
   } catch (error) {
     res.status(500).json({ error: error.message });
