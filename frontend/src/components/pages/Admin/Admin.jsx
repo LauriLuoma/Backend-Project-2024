@@ -86,7 +86,7 @@ function Admin() {
   };
 
   const filteredWords = selectedTag
-    ? words.filter((word) => word.tags.includes(selectedTag))
+    ? words.filter((word) => word.tags.split(',').map(tag => tag.trim()).includes(selectedTag))
     : words;
 
   const uniqueTags = [...new Set(words.flatMap((word) => word.tags.split(',').map(tag => tag.trim())))];
