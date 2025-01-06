@@ -34,4 +34,18 @@ const getAllWords = async () => {
   return response.json();
 };
 
-export { addWord, deleteWord, getAllWords };
+const updateWord = async (id, word) => {
+  const response = await fetch(`/api/words/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(word),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to update word');
+  }
+  return response.json();
+};
+
+export { addWord, deleteWord, getAllWords, updateWord };
