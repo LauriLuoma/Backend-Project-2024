@@ -1,5 +1,5 @@
 const addWord = async (word) => {
-  const response = await fetch('http://localhost:3000/api/words', {
+  const response = await fetch('/api/words', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ const addWord = async (word) => {
 };
 
 const deleteWord = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/words/${id}`, {
+  const response = await fetch(`/api/words/${id}`, {
     method: 'DELETE',
   });
 
@@ -26,4 +26,12 @@ const deleteWord = async (id) => {
   return response.json();
 };
 
-export { addWord, deleteWord };
+const getAllWords = async () => {
+  const response = await fetch('/api/words');
+  if (!response.ok) {
+    throw new Error('Failed to fetch words');
+  }
+  return response.json();
+};
+
+export { addWord, deleteWord, getAllWords };
