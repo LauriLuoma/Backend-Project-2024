@@ -36,6 +36,11 @@ function Admin() {
   };
 
   const handleDeleteWord = async (id) => {
+    const confirmed = window.confirm('Are you sure you want to delete this word?');
+    if (!confirmed) {
+      return;
+    }
+
     try {
       await deleteWord(id);
       console.log('Word deleted successfully');
