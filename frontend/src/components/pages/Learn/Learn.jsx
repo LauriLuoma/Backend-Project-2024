@@ -9,6 +9,7 @@ function Learn() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userTranslation, setUserTranslation] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
+  const [isPracticing, setIsPracticing] = useState(false);
 
   useEffect(() => {
     fetchWords();
@@ -40,7 +41,10 @@ function Learn() {
   };
 
   const checkTranslation = () => {
-    const currentWord = words[currentWordIndex];
+    const currentWord = filteredWords[currentWordIndex];
+    console.log(`Current word in ${selectedLanguage1}: ${currentWord[selectedLanguage1]}`);
+    console.log(`Correct translation in ${selectedLanguage2}: ${currentWord[selectedLanguage2]}`);
+    console.log(`Current word index: ${currentWordIndex}`);
     if (currentWord[selectedLanguage2].toLowerCase() === userTranslation.toLowerCase()) {
       setIsCorrect(true);
     } else {
@@ -50,6 +54,20 @@ function Learn() {
 
   const nextWord = () => {
     setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    setUserTranslation('');
+    setIsCorrect(null);
+  };
+
+  const startPractice = () => {
+    setIsPracticing(true);
+    setCurrentWordIndex(0);
+    setUserTranslation('');
+    setIsCorrect(null);
+    console.log('Starting practice with filtered words:', filteredWords);
+  };
+
+  const stopPractice = () => {
+    setIsPracticing(false);
     setUserTranslation('');
     setIsCorrect(null);
   };
@@ -66,7 +84,7 @@ function Learn() {
       <div>
         <label>
           Select Language 1:
-          <select value={selectedLanguage1} onChange={handleLanguage1Change}>
+          <select value={selectedLanguage1} onChange={handleLanguage1Change} disabled={isPracticing}>
             <option value="english">English</option>
             <option value="finnish">Finnish</option>
             <option value="swedish">Swedish</option>
@@ -74,7 +92,7 @@ function Learn() {
         </label>
         <label>
           Select Language 2:
-          <select value={selectedLanguage2} onChange={handleLanguage2Change}>
+          <select value={selectedLanguage2} onChange={handleLanguage2Change} disabled={isPracticing}>
             <option value="english">English</option>
             <option value="finnish">Finnish</option>
             <option value="swedish">Swedish</option>
@@ -82,7 +100,7 @@ function Learn() {
         </label>
         <label>
           Select Tag:
-          <select value={selectedTag} onChange={handleTagChange}>
+          <select value={selectedTag} onChange={handleTagChange} disabled={isPracticing}>
             <option value="">All</option>
             {uniqueTags.map((tag) => (
               <option key={tag} value={tag}>
@@ -91,8 +109,9 @@ function Learn() {
             ))}
           </select>
         </label>
+        <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
       </div>
-      {filteredWords.length > 0 && (
+      {isPracticing && filteredWords.length > 0 && (
         <div>
           <p>
             Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
@@ -110,6 +129,7 @@ function Learn() {
           <button onClick={nextWord}>Next Word</button>
         </div>
       )}
+      <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
     </div>
   );
 }
