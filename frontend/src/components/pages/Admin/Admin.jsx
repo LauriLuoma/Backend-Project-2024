@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { addWord, deleteWord, getAllWords } from '../../../api';
 
 
 function Admin() {
   const [words, setWords] = useState([]);
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
-  const [deleteId, setDeleteId] = useState('');
 
   useEffect(() => {
     fetchWords();
