@@ -6,6 +6,9 @@ function Learn() {
   const [selectedTag, setSelectedTag] = useState('');
   const [selectedLanguage1, setSelectedLanguage1] = useState('english');
   const [selectedLanguage2, setSelectedLanguage2] = useState('finnish');
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [userTranslation, setUserTranslation] = useState('');
+  const [isCorrect, setIsCorrect] = useState(null);
 
   useEffect(() => {
     fetchWords();
@@ -30,6 +33,25 @@ function Learn() {
 
   const handleLanguage2Change = (e) => {
     setSelectedLanguage2(e.target.value);
+  };
+
+  const handleTranslationChange = (e) => {
+    setUserTranslation(e.target.value);
+  };
+
+  const checkTranslation = () => {
+    const currentWord = words[currentWordIndex];
+    if (currentWord[selectedLanguage2].toLowerCase() === userTranslation.toLowerCase()) {
+      setIsCorrect(true);
+    } else {
+      setIsCorrect(false);
+    }
+  };
+
+  const nextWord = () => {
+    setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    setUserTranslation('');
+    setIsCorrect(null);
   };
 
   const filteredWords = selectedTag
@@ -70,6 +92,24 @@ function Learn() {
           </select>
         </label>
       </div>
+      {filteredWords.length > 0 && (
+        <div>
+          <p>
+            Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
+          </p>
+          <input
+            type="text"
+            value={userTranslation}
+            onChange={handleTranslationChange}
+            placeholder={`Translate to ${selectedLanguage2}`}
+          />
+          <button onClick={checkTranslation}>Check</button>
+          {isCorrect !== null && (
+            <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
+          )}
+          <button onClick={nextWord}>Next Word</button>
+        </div>
+      )}
     </div>
   );
 }
