@@ -42,9 +42,6 @@ function Learn() {
 
   const checkTranslation = () => {
     const currentWord = filteredWords[currentWordIndex];
-    console.log(`Current word in ${selectedLanguage1}: ${currentWord[selectedLanguage1]}`);
-    console.log(`Correct translation in ${selectedLanguage2}: ${currentWord[selectedLanguage2]}`);
-    console.log(`Current word index: ${currentWordIndex}`);
     if (currentWord[selectedLanguage2].toLowerCase() === userTranslation.toLowerCase()) {
       setIsCorrect(true);
     } else {
@@ -53,7 +50,7 @@ function Learn() {
   };
 
   const nextWord = () => {
-    setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    setCurrentWordIndex((prevIndex) => (prevIndex + 1) % filteredWords.length);
     setUserTranslation('');
     setIsCorrect(null);
   };
@@ -63,7 +60,6 @@ function Learn() {
     setCurrentWordIndex(0);
     setUserTranslation('');
     setIsCorrect(null);
-    console.log('Starting practice with filtered words:', filteredWords);
   };
 
   const stopPractice = () => {
