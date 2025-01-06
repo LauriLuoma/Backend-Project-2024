@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { addWord, deleteWord, getAllWords } from '../../../api';
+import { addWord, deleteWord, getAllWords, updateWord } from '../../../api';
 
 
 function Admin() {
   const [words, setWords] = useState([]);
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
+  const [editWord, setEditWord] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchWords();
@@ -48,6 +50,33 @@ function Admin() {
     } catch (error) {
       console.error('Error deleting word:', error);
     }
+  };
+
+  const handleEditWordChange = (e) => {
+    const { name, value } = e.target;
+    setEditWord({ ...editWord, [name]: value });
+  };
+
+  const handleEditWordSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await updateWord(editWord.id, editWord);
+      console.log('Word updated successfully');
+      setIsModalOpen(false);
+      fetchWords();
+    } catch (error) {
+      console.error('Error updating word:', error);
+    }
+  };
+
+  const openEditModal = (word) => {
+    setEditWord(word);
+    setIsModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsModalOpen(false);
+    setEditWord(null);
   };
 
   return (
@@ -99,10 +128,52 @@ function Admin() {
             <p>Swedish: {word.swedish}</p>
             <p>Tags: {word.tags}</p>
             <button onClick={() => handleDeleteWord(word.id)}>Delete</button>
-            <button>Edit</button>
+            <button onClick={() => openEditModal(word)}>Edit</button>
           </div>
         ))}
       </div>
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Edit Word</h2>
+            <form onSubmit={handleEditWordSubmit}>
+              <input
+                type="text"
+                name="english"
+                placeholder="English"
+                value={editWord.english}
+                onChange={handleEditWordChange}
+                required
+              />
+              <input
+                type="text"
+                name="finnish"
+                placeholder="Finnish"
+                value={editWord.finnish}
+                onChange={handleEditWordChange}
+                required
+              />
+              <input
+                type="text"
+                name="swedish"
+                placeholder="Swedish"
+                value={editWord.swedish}
+                onChange={handleEditWordChange}
+                required
+              />
+              <input
+                type="text"
+                name="tags"
+                placeholder="Tags"
+                value={editWord.tags}
+                onChange={handleEditWordChange}
+              />
+              <button type="submit">Save Changes</button>
+              <button type="button" onClick={closeEditModal}>Cancel</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
