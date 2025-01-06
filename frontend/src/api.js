@@ -1,5 +1,5 @@
 const addWord = async (word) => {
-  const response = await fetch('/api/words', {
+  const response = await fetch('http://localhost:3000/api/words', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ const addWord = async (word) => {
 };
 
 const deleteWord = async (id) => {
-  const response = await fetch(`/api/words/${id}`, {
+  const response = await fetch(`http://localhost:3000/api/words/${id}`, {
     method: 'DELETE',
   });
 
