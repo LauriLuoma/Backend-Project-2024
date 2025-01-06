@@ -33,6 +33,7 @@ function Admin() {
       await addWord(newWord);
       console.log('Word added successfully');
       setNewWord({ english: '', finnish: '', swedish: '', tags: '' });
+      fetchWords();
     } catch (error) {
       console.error('Error adding word:', error);
     }
