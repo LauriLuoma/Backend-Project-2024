@@ -7,6 +7,7 @@ function Admin() {
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
   const [editWord, setEditWord] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTag, setSelectedTag] = useState('');
 
   useEffect(() => {
     fetchWords();
@@ -79,6 +80,16 @@ function Admin() {
     setEditWord(null);
   };
 
+  const handleTagChange = (e) => {
+    setSelectedTag(e.target.value);
+  };
+
+  const filteredWords = selectedTag
+    ? words.filter((word) => word.tags.includes(selectedTag))
+    : words;
+
+  const uniqueTags = [...new Set(words.flatMap((word) => word.tags.split(',').map(tag => tag.trim())))];
+
   return (
     <div>
       <h1>Admin</h1>
@@ -120,8 +131,19 @@ function Admin() {
         </form>
       </div>
       <div>
+        <h2>Filter by Tag</h2>
+        <select value={selectedTag} onChange={handleTagChange}>
+          <option value="">All</option>
+          {uniqueTags.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
         <h2>Words</h2>
-        {words.map((word) => (
+        {filteredWords.map((word) => (
           <div key={word.id} style={{ border: '1px solid black', padding: '10px', margin: '10px 0' }}>
             <p>English: {word.english}</p>
             <p>Finnish: {word.finnish}</p>
