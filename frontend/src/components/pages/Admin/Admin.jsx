@@ -97,7 +97,7 @@ function Admin() {
         <h1>Admin</h1>
       </header>
       <section className='add-word'>
-        <h2>Add Word</h2>
+        <h2>Add new word</h2>
         <form onSubmit={handleAddWordSubmit}>
           <div className='form-group'>
             <input
@@ -136,7 +136,7 @@ function Admin() {
         </form>
       </section>
       <section className='filter-tag'>
-        <h2>Filter by Tag</h2>
+        <h2>Filter by theme</h2>
         <select value={selectedTag} onChange={handleTagChange}>
           <option value="">All</option>
           {uniqueTags.map((tag) => (
@@ -165,37 +165,53 @@ function Admin() {
             <h2>Edit Word</h2>
             <form onSubmit={handleEditWordSubmit}>
               <div className='form-group'>
-                <input
-                  type="text"
-                  name="english"
-                  placeholder="English"
-                  value={editWord.english}
-                  onChange={handleEditWordChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="finnish"
-                  placeholder="Finnish"
-                  value={editWord.finnish}
-                  onChange={handleEditWordChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="swedish"
-                  placeholder="Swedish"
-                  value={editWord.swedish}
-                  onChange={handleEditWordChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="tags"
-                  placeholder="Tags"
-                  value={editWord.tags}
-                  onChange={handleEditWordChange}
-                />
+                <div className='form-row'>
+                  <label htmlFor="edit-english">English:</label>
+                  <input
+                    type="text"
+                    id="edit-english"
+                    name="english"
+                    placeholder="English"
+                    value={editWord.english}
+                    onChange={handleEditWordChange}
+                    required
+                  />
+                </div>
+                <div className='form-row'>
+                  <label htmlFor="edit-finnish">Finnish:</label>
+                  <input
+                    type="text"
+                    id="edit-finnish"
+                    name="finnish"
+                    placeholder="Finnish"
+                    value={editWord.finnish}
+                    onChange={handleEditWordChange}
+                    required
+                  />
+                </div>
+                <div className='form-row'>
+                  <label htmlFor="edit-swedish">Swedish:</label>
+                  <input
+                    type="text"
+                    id="edit-swedish"
+                    name="swedish"
+                    placeholder="Swedish"
+                    value={editWord.swedish}
+                    onChange={handleEditWordChange}
+                    required
+                  />
+                </div>
+                <div className='form-row'>
+                  <label htmlFor="edit-tags">Tags:</label>
+                  <input
+                    type="text"
+                    id="edit-tags"
+                    name="tags"
+                    placeholder="Tags"
+                    value={editWord.tags}
+                    onChange={handleEditWordChange}
+                  />
+                </div>
               </div>
               <button type="submit">Save Changes</button>
               <button type="button" onClick={closeEditModal}>Cancel</button>
