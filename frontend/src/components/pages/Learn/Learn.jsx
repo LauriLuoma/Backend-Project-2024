@@ -77,9 +77,11 @@ function Learn() {
   return (
     <div className='container'>
       <div className='learn-container'>
-        <h1>Learn words!</h1>
-        <h2>Translate the words from the first language to the second language</h2>
-        <div className='learn-options'>
+        <header>
+          <h1>Learn words!</h1>
+          <h2>Translate the words from the first language to the second language</h2>
+        </header>
+        <section className='learn-options'>
           <label className='language-select'>
             Select the language to translate from:
             <select value={selectedLanguage1} onChange={handleLanguage1Change} disabled={isPracticing}>
@@ -107,12 +109,12 @@ function Learn() {
               ))}
             </select>
           </label>
-        </div>
-        <div className='button-container'>
+        </section>
+        <section className='button-container'>
           <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
-        </div>
+        </section>
         {isPracticing && filteredWords.length > 0 && (
-          <div className='practice-container'>
+          <section className='practice-container'>
             <p>
               Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
             </p>
@@ -131,11 +133,11 @@ function Learn() {
             <div className='button-container'>
               <button onClick={nextWord}>Next Word</button>
             </div>
-          </div>
+          </section>
         )}
-        <div className='button-container'>
+        <section className='button-container'>
           <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
-        </div>
+        </section>
       </div>
     </div>
   );
