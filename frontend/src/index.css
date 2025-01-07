@@ -11,3 +11,99 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+.learn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.learn-options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #333;
+}
+
+.learn-options label {
+  margin-bottom: 10px;
+}
+
+.button-container {
+  margin-top: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #333;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #777;
+}
+
+.practice-container {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #333;
+}
+
+@media (min-width: 769px) {
+  .learn-options {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .learn-options label {
+    flex: 1;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
+  .learn-options label:last-child {
+    margin-right: 0;
+  }
+}
