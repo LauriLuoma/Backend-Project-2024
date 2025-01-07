@@ -1,15 +1,15 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #202020;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  font-size: 18px;
 }
 
 body {
@@ -17,27 +17,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
 .container {
   width: 100%;
-  max-width: 500px;
-  padding: 20px;
+  padding: 50px;
   box-sizing: border-box;
 }
 
-@media (min-width: 501px) and (max-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
+@media (min-width: 501px) {}
 
-@media (min-width: 769px) {
-  .container {
-    max-width: 1024px;
-  }
-}
+@media (min-width: 769px) {}
 
 .learn-container {
   display: flex;
@@ -51,44 +41,75 @@ body {
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
-  border: 1px solid #ccc;
+  border: 1px;
   border-radius: 10px;
   padding: 20px;
-  background-color: #333;
+  background-color: #333333;
 }
 
 .learn-options label {
   margin-bottom: 10px;
 }
 
+.learn-options select {
+  margin: 5px;
+  cursor: pointer;
+}
+
 .button-container {
   margin-top: 20px;
-  border: 2px solid #ccc;
+  border: 2px;
   border-radius: 10px;
-  background-color: #333;
+  background-color: #333333;
 }
 
 button {
   width: 100%;
   padding: 10px;
-  border: none;
+  border: 1px solid #909090;
   border-radius: 10px;
-  background-color: #555;
   color: white;
   font-size: 16px;
   cursor: pointer;
 }
 
+button:active {
+  background-color: #555;
+}
+
+button:disabled {
+  background-color: #272727;
+  cursor: not-allowed;
+  color: #777;
+}
+
 button:hover {
-  background-color: #777;
+  background-color: #b5b5b5;
+  color: #202020;
+}
+
+button:disabled:hover {
+  background-color: #272727;
+  color: #777;
 }
 
 .practice-container {
+  width: 100%;
   margin-top: 20px;
-  border: 1px solid #ccc;
+  border: 1px;
   border-radius: 10px;
   padding: 20px;
-  background-color: #333;
+  background-color: #333333;
+}
+
+.practice-container input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
 }
 
 @media (min-width: 769px) {
