@@ -10,6 +10,9 @@ function Learn() {
   const [userTranslation, setUserTranslation] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [isPracticing, setIsPracticing] = useState(false);
+  const [score, setScore] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
+  const [hasTried, setHasTried] = useState(false);
 
   useEffect(() => {
     fetchWords();
@@ -44,15 +47,28 @@ function Learn() {
     const currentWord = filteredWords[currentWordIndex];
     if (currentWord[selectedLanguage2].toLowerCase() === userTranslation.toLowerCase()) {
       setIsCorrect(true);
+      if (!hasTried) {
+        setScore(score + 1);
+      }
     } else {
       setIsCorrect(false);
     }
+    setIsChecked(true);
   };
+
+  const tryAgain = () => {
+    setUserTranslation('');
+    setIsCorrect(null);
+    setIsChecked(false);
+    setHasTried(true);
+  }
 
   const nextWord = () => {
     setCurrentWordIndex((prevIndex) => (prevIndex + 1) % filteredWords.length);
     setUserTranslation('');
     setIsCorrect(null);
+    setIsChecked(false);
+    setHasTried(false);
   };
 
   const startPractice = () => {
@@ -60,12 +76,12 @@ function Learn() {
     setCurrentWordIndex(0);
     setUserTranslation('');
     setIsCorrect(null);
+    setIsChecked(false);
+    setHasTried(false);
   };
 
   const stopPractice = () => {
     setIsPracticing(false);
-    setUserTranslation('');
-    setIsCorrect(null);
   };
 
   const filteredWords = selectedTag
@@ -110,6 +126,7 @@ function Learn() {
             </select>
           </label>
         </section>
+        <p>Words translated correctly: {score}</p>
         <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
         {isPracticing && filteredWords.length > 0 && (
           <section className='practice-container'>
@@ -123,13 +140,16 @@ function Learn() {
               placeholder={`Translate to ${selectedLanguage2}`}
             />
             <div>
-              <button onClick={checkTranslation}>Check</button>
+              <button onClick={checkTranslation} disabled={isChecked}>Check</button>
             </div>
             {isCorrect !== null && (
-              <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
+              <div>
+                <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
+                {!isCorrect && <button onClick={tryAgain}>Try Again</button> }
+              </div>
             )}
             <div>
-              <button onClick={nextWord}>Next Word</button>
+              <button onClick={nextWord} disabled={!isChecked}>Next Word</button>
             </div>
           </section>
         )}
