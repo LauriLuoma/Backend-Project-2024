@@ -8,7 +8,7 @@ function App() {
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Navbar />
-        <div style={{ width: '90%', marginTop: '20px' }}>
+        <div style={{ width: '100%' }}>
           <Routes>
             <Route path="/" element={<Learn />} />
             <Route path="/admin" element={<Admin />} />
