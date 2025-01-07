@@ -17,17 +17,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .container {
   width: 100%;
   padding: 50px;
   box-sizing: border-box;
+  margin: auto;
 }
-
-@media (min-width: 501px) {}
-
-@media (min-width: 769px) {}
 
 .learn-container {
   display: flex;
@@ -41,29 +41,28 @@ body {
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
-  border: 1px;
   border-radius: 10px;
   padding: 20px;
   background-color: #333333;
 }
 
 .learn-options label {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .learn-options select {
   margin: 5px;
+  padding: 5px;
+  font-size: 14px;
   cursor: pointer;
-}
-
-.button-container {
-  margin-top: 20px;
-  border: 2px;
-  border-radius: 10px;
-  background-color: #333333;
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 button {
+  margin-top: 20px;
+  max-width: 200px;
   width: 100%;
   padding: 10px;
   border: 1px solid #909090;
@@ -96,7 +95,6 @@ button:disabled:hover {
 .practice-container {
   width: 100%;
   margin-top: 20px;
-  border: 1px;
   border-radius: 10px;
   padding: 20px;
   background-color: #333333;
@@ -104,6 +102,7 @@ button:disabled:hover {
 
 .practice-container input {
   width: 90%;
+  max-width: 300px;
   padding: 10px;
   margin-bottom: 10px;
   border: none;
@@ -112,16 +111,36 @@ button:disabled:hover {
   color: rgb(0, 0, 0);
 }
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
+  .learn-container {
+    margin: auto;
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 768px) {
+
+
+  .learn-container {
+    margin: auto;
+    max-width: 680px;
+  }
+
   .learn-options {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 
   .learn-options label {
     flex: 1;
     margin-bottom: 0;
     margin-right: 10px;
+  }
+
+  .learn-options select {
+    display: block;
+    width: 100%;
   }
 
   .learn-options label:last-child {
