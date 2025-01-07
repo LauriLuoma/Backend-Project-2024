@@ -78,9 +78,10 @@ function Learn() {
     <div className='container'>
       <div className='learn-container'>
         <h1>Learn words!</h1>
+        <h2>Translate the words from the first language to the second language</h2>
         <div className='learn-options'>
           <label className='language-select'>
-            Select visible language:
+            Select the language to translate from:
             <select value={selectedLanguage1} onChange={handleLanguage1Change} disabled={isPracticing}>
               <option value="english">English</option>
               <option value="finnish">Finnish</option>
@@ -88,7 +89,7 @@ function Learn() {
             </select>
           </label>
           <label className='language-select'>
-            Select translation language:
+            Select the language to translate to:
             <select value={selectedLanguage2} onChange={handleLanguage2Change} disabled={isPracticing}>
               <option value="english">English</option>
               <option value="finnish">Finnish</option>
@@ -96,7 +97,7 @@ function Learn() {
             </select>
           </label>
           <label className='tag-select'>
-            Select Tag:
+            Select a theme for the words:
             <select value={selectedTag} onChange={handleTagChange} disabled={isPracticing}>
               <option value="">All</option>
               {uniqueTags.map((tag) => (
