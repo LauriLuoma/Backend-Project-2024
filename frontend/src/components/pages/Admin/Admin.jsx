@@ -103,7 +103,8 @@ function Admin() {
   return (
     <div className='container'>
       <header>
-        <h1>Admin</h1>
+        <h1>Admin view</h1>
+        <h3>Here you can add, edit and delete words</h3>
       </header>
       <section>
         <button onClick={openAddWordModal}>Add New Word</button>
@@ -153,7 +154,7 @@ function Admin() {
         </div>
       )}
       <section className='filter-tag'>
-        <h2>Filter by theme</h2>
+        <h2>Filter words by theme</h2>
         <select value={selectedTag} onChange={handleTagChange}>
           <option value="">All</option>
           {uniqueTags.map((tag) => (
