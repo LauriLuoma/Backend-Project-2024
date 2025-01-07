@@ -26,9 +26,6 @@ body {
   padding: 50px;
   box-sizing: border-box;
   margin: auto;
-}
-
-.learn-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -111,7 +108,7 @@ button:disabled:hover {
 }
 
 @media (min-width: 600px) {
-  .learn-container {
+  .container {
     margin: auto;
     max-width: 500px;
   }
@@ -120,7 +117,7 @@ button:disabled:hover {
 @media (min-width: 768px) {
 
 
-  .learn-container {
+  .container {
     margin: auto;
     max-width: 680px;
   }
