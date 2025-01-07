@@ -7,6 +7,7 @@ function Admin() {
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
   const [editWord, setEditWord] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddWordModalOpen, setIsAddWordModalOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState('');
 
   useEffect(() => {
@@ -81,6 +82,14 @@ function Admin() {
     setEditWord(null);
   };
 
+  const openAddWordModal = () => {
+    setIsAddWordModalOpen(true);
+  };
+
+  const closeAddWordModal = () => {
+    setIsAddWordModalOpen(false);
+  };
+
   const handleTagChange = (e) => {
     setSelectedTag(e.target.value);
   };
@@ -96,45 +105,53 @@ function Admin() {
       <header>
         <h1>Admin</h1>
       </header>
-      <section className='add-word'>
-        <h2>Add new word</h2>
-        <form onSubmit={handleAddWordSubmit}>
-          <div className='form-group'>
-            <input
-              type="text"
-              name="english"
-              placeholder="English"
-              value={newWord.english}
-              onChange={handleAddWordChange}
-              required
-            />
-            <input
-              type="text"
-              name="finnish"
-              placeholder="Finnish"
-              value={newWord.finnish}
-              onChange={handleAddWordChange}
-              required
-            />
-            <input
-              type="text"
-              name="swedish"
-              placeholder="Swedish"
-              value={newWord.swedish}
-              onChange={handleAddWordChange}
-              required
-            />
-            <input
-              type="text"
-              name="tags"
-              placeholder="Tags"
-              value={newWord.tags}
-              onChange={handleAddWordChange}
-            />
-          </div>
-          <button type="submit">Add Word</button>
-        </form>
+      <section>
+        <button onClick={openAddWordModal}>Add New Word</button>
       </section>
+      {isAddWordModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Add New Word</h2>
+            <form onSubmit={handleAddWordSubmit}>
+              <div className='form-group'>
+                <input
+                  type="text"
+                  name="english"
+                  placeholder="English"
+                  value={newWord.english}
+                  onChange={handleAddWordChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="finnish"
+                  placeholder="Finnish"
+                  value={newWord.finnish}
+                  onChange={handleAddWordChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="swedish"
+                  placeholder="Swedish"
+                  value={newWord.swedish}
+                  onChange={handleAddWordChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="tags"
+                  placeholder="Tags"
+                  value={newWord.tags}
+                  onChange={handleAddWordChange}
+                />
+              </div>
+              <button type="submit">Add Word</button>
+              <button type="button" onClick={closeAddWordModal}>Cancel</button>
+            </form>
+          </div>
+        </div>
+      )}
       <section className='filter-tag'>
         <h2>Filter by theme</h2>
         <select value={selectedTag} onChange={handleTagChange}>
@@ -154,8 +171,8 @@ function Admin() {
             <p>Finnish: {word.finnish}</p>
             <p>Swedish: {word.swedish}</p>
             <p>Tags: {word.tags}</p>
-            <button onClick={() => handleDeleteWord(word.id)}>Delete</button>
             <button onClick={() => openEditModal(word)}>Edit</button>
+            <button onClick={() => handleDeleteWord(word.id)}>Delete</button>
           </article>
         ))}
       </section>
