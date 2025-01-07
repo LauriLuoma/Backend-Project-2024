@@ -75,26 +75,26 @@ function Learn() {
   const uniqueTags = [...new Set(words.flatMap((word) => word.tags.split(',').map(tag => tag.trim())))];
 
   return (
-    <div>
-      <h1>Learn!</h1>
-      <div>
-        <label>
-          Select Language 1:
+    <div className='learn-container'>
+      <h1>Learn words!</h1>
+      <div className='learn-options'>
+        <label className='language-select'>
+          Select visible language:
           <select value={selectedLanguage1} onChange={handleLanguage1Change} disabled={isPracticing}>
             <option value="english">English</option>
             <option value="finnish">Finnish</option>
             <option value="swedish">Swedish</option>
           </select>
         </label>
-        <label>
-          Select Language 2:
+        <label className='language-select'>
+          Select translation language:
           <select value={selectedLanguage2} onChange={handleLanguage2Change} disabled={isPracticing}>
             <option value="english">English</option>
             <option value="finnish">Finnish</option>
             <option value="swedish">Swedish</option>
           </select>
         </label>
-        <label>
+        <label className='tag-select'>
           Select Tag:
           <select value={selectedTag} onChange={handleTagChange} disabled={isPracticing}>
             <option value="">All</option>
@@ -105,10 +105,12 @@ function Learn() {
             ))}
           </select>
         </label>
+      </div>
+      <div className='button-container'>
         <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
       </div>
       {isPracticing && filteredWords.length > 0 && (
-        <div>
+        <div className='practice-container'>
           <p>
             Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
           </p>
@@ -118,14 +120,20 @@ function Learn() {
             onChange={handleTranslationChange}
             placeholder={`Translate to ${selectedLanguage2}`}
           />
-          <button onClick={checkTranslation}>Check</button>
+          <div className='button-container'>
+            <button onClick={checkTranslation}>Check</button>
+          </div>
           {isCorrect !== null && (
             <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
           )}
-          <button onClick={nextWord}>Next Word</button>
+          <div className='button-container'>
+            <button onClick={nextWord}>Next Word</button>
+          </div>
         </div>
       )}
-      <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
+      <div className='button-container'>
+        <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
+      </div>
     </div>
   );
 }
