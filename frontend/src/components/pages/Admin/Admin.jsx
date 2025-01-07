@@ -92,46 +92,50 @@ function Admin() {
   const uniqueTags = [...new Set(words.flatMap((word) => word.tags.split(',').map(tag => tag.trim())))];
 
   return (
-    <div>
-      <h1>Admin</h1>
-      <div>
+    <div className='container'>
+      <header>
+        <h1>Admin</h1>
+      </header>
+      <section className='add-word'>
         <h2>Add Word</h2>
         <form onSubmit={handleAddWordSubmit}>
-          <input
-            type="text"
-            name="english"
-            placeholder="English"
-            value={newWord.english}
-            onChange={handleAddWordChange}
-            required
-          />
-          <input
-            type="text"
-            name="finnish"
-            placeholder="Finnish"
-            value={newWord.finnish}
-            onChange={handleAddWordChange}
-            required
-          />
-          <input
-            type="text"
-            name="swedish"
-            placeholder="Swedish"
-            value={newWord.swedish}
-            onChange={handleAddWordChange}
-            required
-          />
-          <input
-            type="text"
-            name="tags"
-            placeholder="Tags"
-            value={newWord.tags}
-            onChange={handleAddWordChange}
-          />
+          <div className='form-group'>
+            <input
+              type="text"
+              name="english"
+              placeholder="English"
+              value={newWord.english}
+              onChange={handleAddWordChange}
+              required
+            />
+            <input
+              type="text"
+              name="finnish"
+              placeholder="Finnish"
+              value={newWord.finnish}
+              onChange={handleAddWordChange}
+              required
+            />
+            <input
+              type="text"
+              name="swedish"
+              placeholder="Swedish"
+              value={newWord.swedish}
+              onChange={handleAddWordChange}
+              required
+            />
+            <input
+              type="text"
+              name="tags"
+              placeholder="Tags"
+              value={newWord.tags}
+              onChange={handleAddWordChange}
+            />
+          </div>
           <button type="submit">Add Word</button>
         </form>
-      </div>
-      <div>
+      </section>
+      <section className='filter-tag'>
         <h2>Filter by Tag</h2>
         <select value={selectedTag} onChange={handleTagChange}>
           <option value="">All</option>
@@ -141,56 +145,58 @@ function Admin() {
             </option>
           ))}
         </select>
-      </div>
-      <div>
+      </section>
+      <section className='words'>
         <h2>Words</h2>
         {filteredWords.map((word) => (
-          <div key={word.id} style={{ border: '1px solid black', padding: '10px', margin: '10px 0' }}>
+          <article key={word.id} className='word-box'>
             <p>English: {word.english}</p>
             <p>Finnish: {word.finnish}</p>
             <p>Swedish: {word.swedish}</p>
             <p>Tags: {word.tags}</p>
             <button onClick={() => handleDeleteWord(word.id)}>Delete</button>
             <button onClick={() => openEditModal(word)}>Edit</button>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
             <h2>Edit Word</h2>
             <form onSubmit={handleEditWordSubmit}>
-              <input
-                type="text"
-                name="english"
-                placeholder="English"
-                value={editWord.english}
-                onChange={handleEditWordChange}
-                required
-              />
-              <input
-                type="text"
-                name="finnish"
-                placeholder="Finnish"
-                value={editWord.finnish}
-                onChange={handleEditWordChange}
-                required
-              />
-              <input
-                type="text"
-                name="swedish"
-                placeholder="Swedish"
-                value={editWord.swedish}
-                onChange={handleEditWordChange}
-                required
-              />
-              <input
-                type="text"
-                name="tags"
-                placeholder="Tags"
-                value={editWord.tags}
-                onChange={handleEditWordChange}
-              />
+              <div className='form-group'>
+                <input
+                  type="text"
+                  name="english"
+                  placeholder="English"
+                  value={editWord.english}
+                  onChange={handleEditWordChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="finnish"
+                  placeholder="Finnish"
+                  value={editWord.finnish}
+                  onChange={handleEditWordChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="swedish"
+                  placeholder="Swedish"
+                  value={editWord.swedish}
+                  onChange={handleEditWordChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="tags"
+                  placeholder="Tags"
+                  value={editWord.tags}
+                  onChange={handleEditWordChange}
+                />
+              </div>
               <button type="submit">Save Changes</button>
               <button type="button" onClick={closeEditModal}>Cancel</button>
             </form>
