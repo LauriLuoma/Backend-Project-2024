@@ -76,67 +76,65 @@ function Learn() {
 
   return (
     <div className='container'>
-      <header>
-        <h1>Learn words!</h1>
-        <h2>Translate the words from the first language to the second language</h2>
-      </header>
-      <section className='learn-options'>
-        <label className='language-select' htmlFor="language1">
-          Select the language to translate from:
-          <select id="language1" value={selectedLanguage1} onChange={handleLanguage1Change} disabled={isPracticing}>
-            <option value="english">English</option>
-            <option value="finnish">Finnish</option>
-            <option value="swedish">Swedish</option>
-          </select>
-        </label>
-        <label className='language-select' htmlFor="language2">
-          Select the language to translate to:
-          <select id="language2" value={selectedLanguage2} onChange={handleLanguage2Change} disabled={isPracticing}>
-            <option value="english">English</option>
-            <option value="finnish">Finnish</option>
-            <option value="swedish">Swedish</option>
-          </select>
-        </label>
-        <label className='tag-select' htmlFor="tag">
-          Select a theme for the words:
-          <select id="tag" value={selectedTag} onChange={handleTagChange} disabled={isPracticing}>
-            <option value="">All</option>
-            {uniqueTags.map((tag) => (
-              <option key={tag} value={tag}>
-                {tag}
-              </option>
-            ))}
-          </select>
-        </label>
-      </section>
-      <section>
-        <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
-      </section>
-      {isPracticing && filteredWords.length > 0 && (
-        <section className='practice-container'>
-          <p>
-            Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
-          </p>
-          <input
-            type="text"
-            value={userTranslation}
-            onChange={handleTranslationChange}
-            placeholder={`Translate to ${selectedLanguage2}`}
-          />
-          <div>
-            <button onClick={checkTranslation}>Check</button>
-          </div>
-          {isCorrect !== null && (
-            <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
-          )}
-          <div>
-            <button onClick={nextWord}>Next Word</button>
-          </div>
+      <div className='learn-container'>
+        <header>
+          <h1>Learn words!</h1>
+          <h2>Translate the words from the first language to the second language</h2>
+        </header>
+        <section className='learn-options'>
+          <label className='language-select' htmlFor="language1">
+            Select the language to translate from:
+            <select id="language1" value={selectedLanguage1} onChange={handleLanguage1Change} disabled={isPracticing}>
+              <option value="english">English</option>
+              <option value="finnish">Finnish</option>
+              <option value="swedish">Swedish</option>
+            </select>
+          </label>
+          <label className='language-select' htmlFor="language2">
+            Select the language to translate to:
+            <select id="language2" value={selectedLanguage2} onChange={handleLanguage2Change} disabled={isPracticing}>
+              <option value="english">English</option>
+              <option value="finnish">Finnish</option>
+              <option value="swedish">Swedish</option>
+            </select>
+          </label>
+          <label className='tag-select' htmlFor="tag">
+            Select a theme for the words:
+            <select id="tag" value={selectedTag} onChange={handleTagChange} disabled={isPracticing}>
+              <option value="">All</option>
+              {uniqueTags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
+            </select>
+          </label>
         </section>
-      )}
-      <section>
+        <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
+        {isPracticing && filteredWords.length > 0 && (
+          <section className='practice-container'>
+            <p>
+              Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
+            </p>
+            <input
+              type="text"
+              value={userTranslation}
+              onChange={handleTranslationChange}
+              placeholder={`Translate to ${selectedLanguage2}`}
+            />
+            <div>
+              <button onClick={checkTranslation}>Check</button>
+            </div>
+            {isCorrect !== null && (
+              <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
+            )}
+            <div>
+              <button onClick={nextWord}>Next Word</button>
+            </div>
+          </section>
+        )}
         <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
-      </section>
+      </div>
     </div>
   );
 }
