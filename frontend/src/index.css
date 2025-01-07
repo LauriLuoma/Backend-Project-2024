@@ -1,3 +1,5 @@
+/* Learn words! styling */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,30 +31,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-}
-
-.learn-options {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #333333;
-}
-
-.learn-options label {
-  margin-bottom: 20px;
-}
-
-.learn-options select {
-  margin: 5px;
-  padding: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  display: block;
-  width: 100%;
   text-align: center;
 }
 
@@ -88,6 +66,32 @@ button:disabled:hover {
   color: #777;
 }
 
+/* Learn page styling */
+
+.learn-options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #333333;
+}
+
+.learn-options label {
+  margin-bottom: 20px;
+}
+
+.learn-options select {
+  margin: 5px;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
 .practice-container {
   width: 100%;
   margin-top: 20px;
@@ -96,7 +100,7 @@ button:disabled:hover {
   background-color: #333333;
 }
 
-.practice-container input {
+input {
   width: 90%;
   max-width: 300px;
   padding: 10px;
@@ -107,6 +111,8 @@ button:disabled:hover {
   color: rgb(0, 0, 0);
 }
 
+/* Responsive design */
+
 @media (min-width: 600px) {
   .container {
     margin: auto;
@@ -115,12 +121,12 @@ button:disabled:hover {
 }
 
 @media (min-width: 768px) {
-
-
   .container {
     margin: auto;
     max-width: 680px;
   }
+
+  /* Learn page styling */
 
   .learn-options {
     flex-direction: row;
