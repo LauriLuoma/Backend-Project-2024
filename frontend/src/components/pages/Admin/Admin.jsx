@@ -115,37 +115,53 @@ function Admin() {
             <h2>Add New Word</h2>
             <form onSubmit={handleAddWordSubmit}>
               <div className='form-group'>
-                <input
-                  type="text"
-                  name="english"
-                  placeholder="English"
-                  value={newWord.english}
-                  onChange={handleAddWordChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="finnish"
-                  placeholder="Finnish"
-                  value={newWord.finnish}
-                  onChange={handleAddWordChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="swedish"
-                  placeholder="Swedish"
-                  value={newWord.swedish}
-                  onChange={handleAddWordChange}
-                  required
-                />
-                <input
-                  type="text"
-                  name="tags"
-                  placeholder="Tags"
-                  value={newWord.tags}
-                  onChange={handleAddWordChange}
-                />
+                <div className='form-row'>
+                  <label htmlFor="add-english">English:</label>
+                  <input
+                    type="text"
+                    id="add-english"
+                    name="english"
+                    placeholder="English"
+                    value={newWord.english}
+                    onChange={handleAddWordChange}
+                    required
+                  />
+                </div>
+                <div className='form-row'>
+                  <label htmlFor="add-finnish">Finnish:</label>
+                  <input
+                    type="text"
+                    id="add-finnish"
+                    name="finnish"
+                    placeholder="Finnish"
+                    value={newWord.finnish}
+                    onChange={handleAddWordChange}
+                    required
+                  />
+                </div>
+                <div className='form-row'>
+                  <label htmlFor="add-swedish">Swedish:</label>
+                  <input
+                    type="text"
+                    id="add-swedish"
+                    name="swedish"
+                    placeholder="Swedish"
+                    value={newWord.swedish}
+                    onChange={handleAddWordChange}
+                    required
+                  />
+                </div>
+                <div className='form-row'>
+                  <label htmlFor="add-tags">Tag:</label>
+                  <input
+                    type="text"
+                    id="add-tags"
+                    name="tags"
+                    placeholder="Tags"
+                    value={newWord.tags}
+                    onChange={handleAddWordChange}
+                  />
+                </div>
               </div>
               <button type="submit">Add Word</button>
               <button type="button" onClick={closeAddWordModal}>Cancel</button>
@@ -154,7 +170,7 @@ function Admin() {
         </div>
       )}
       <section className='filter-tag'>
-        <h2>Filter words by theme</h2>
+        <h2>Filter words by tag/theme</h2>
         <select value={selectedTag} onChange={handleTagChange}>
           <option value="">All</option>
           {uniqueTags.map((tag) => (
