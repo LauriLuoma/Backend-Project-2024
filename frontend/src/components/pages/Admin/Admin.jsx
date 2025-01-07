@@ -164,8 +164,8 @@ function Admin() {
           ))}
         </select>
       </section>
+      <h2>Words</h2>
       <section className='words'>
-        <h2>Words</h2>
         {filteredWords.map((word) => (
           <article key={word.id} className='word-box'>
             <p>English: {word.english}</p>
