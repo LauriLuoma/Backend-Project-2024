@@ -109,7 +109,7 @@ function Learn() {
           </select>
         </label>
       </section>
-      <section className='button-container'>
+      <section>
         <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
       </section>
       {isPracticing && filteredWords.length > 0 && (
@@ -123,18 +123,18 @@ function Learn() {
             onChange={handleTranslationChange}
             placeholder={`Translate to ${selectedLanguage2}`}
           />
-          <div className='button-container'>
+          <div>
             <button onClick={checkTranslation}>Check</button>
           </div>
           {isCorrect !== null && (
             <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
           )}
-          <div className='button-container'>
+          <div>
             <button onClick={nextWord}>Next Word</button>
           </div>
         </section>
       )}
-      <section className='button-container'>
+      <section>
         <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
       </section>
     </div>
