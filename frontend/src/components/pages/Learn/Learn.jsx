@@ -126,7 +126,7 @@ function Learn() {
             </select>
           </label>
         </section>
-        <p>Words translated correctly: {score}</p>
+        <p>Words translated correctly on first try: {score}</p>
         <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
         {isPracticing && filteredWords.length > 0 && (
           <section className='practice-container'>
