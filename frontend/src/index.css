@@ -178,7 +178,7 @@ button:disabled:hover {
   margin: 10px;
 }
 
-/* Form group styles */
+/* Form styling for popups */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -245,7 +245,6 @@ button:disabled:hover {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    /* Add space between word boxes */
   }
 
   .word-box {
