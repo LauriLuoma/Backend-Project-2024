@@ -6,7 +6,7 @@ function Admin() {
   const [words, setWords] = useState([]);
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
   const [editWord, setEditWord] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddWordModalOpen, setIsAddWordModalOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState('');
 
@@ -65,7 +65,7 @@ function Admin() {
     try {
       await updateWord(editWord.id, editWord);
       console.log('Word updated successfully');
-      setIsModalOpen(false);
+      setIsEditModalOpen(false);
       fetchWords();
     } catch (error) {
       console.error('Error updating word:', error);
@@ -74,11 +74,11 @@ function Admin() {
 
   const openEditModal = (word) => {
     setEditWord(word);
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
   };
 
   const closeEditModal = () => {
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
     setEditWord(null);
   };
 
@@ -177,7 +177,7 @@ function Admin() {
           </article>
         ))}
       </section>
-      {isModalOpen && (
+      {isEditModalOpen && (
         <div className="modal">
           <div className="modal-content">
             <h2>Edit Word</h2>
