@@ -9,6 +9,12 @@ lerna-debug.log*
 
 .DS_Store
 
+# Build directories
+dist/
+build/
+frontend/build/
+backend/dist/
+
 # HTTP testfiles
 test.http
 
@@ -141,3 +147,7 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Miscellaneous
+.DS_Store
+.env
