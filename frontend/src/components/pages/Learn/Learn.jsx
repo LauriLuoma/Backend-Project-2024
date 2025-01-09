@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllWords } from '../../../api';
 import { filterWordsByTag, getUniqueTags } from '../../../utils/wordUtils';
+import Footer from '../../Footer/Footer';
 
 function Learn() {
   const [words, setWords] = useState([]);
@@ -153,6 +154,7 @@ function Learn() {
         )}
         <button onClick={stopPractice} disabled={!isPracticing}>Stop Practice</button>
       </div>
+      <Footer />
     </div>
   );
 }
