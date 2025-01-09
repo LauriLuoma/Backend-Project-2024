@@ -5,14 +5,15 @@
     "frontend",
     "backend"
   ],
+  "author": "Lauri Luoma lauluoma@gmail.com",
+  "license": "ISC",
   "scripts": {
     "install-all": "npm install",
     "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "start-frontend": "npm run dev --workspace=frontend",
     "start-backend": "npm start --workspace=backend",
-    "build": "npm run build-frontend && npm run build-backend",
-    "build-frontend": "npm run build --workspace=frontend",
-    "build-backend": "npm run build --workspace=backend"
+    "build": "npm run build-frontend",
+    "build-frontend": "npm run build --workspace=frontend"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
