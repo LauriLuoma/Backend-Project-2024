@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
 import { addWord, deleteWord, getAllWords, updateWord } from '../../../api';
 import { filterWordsByTag, getUniqueTags } from '../../../utils/wordUtils';
+import useModal from '../../../hooks/useModal';
 
 
 function Admin() {
   const [words, setWords] = useState([]);
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
-  const [editWord, setEditWord] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isAddWordModalOpen, setIsAddWordModalOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState('');
+  const {
+    isEditModalOpen,
+    isAddWordModalOpen,
+    editWord,
+    setEditWord,
+    openEditModal,
+    closeEditModal,
+    openAddWordModal,
+    closeAddWordModal,
+  } = useModal();
 
   useEffect(() => {
     fetchWords();
@@ -34,7 +42,7 @@ function Admin() {
     try {
       await addWord(newWord);
       console.log('Word added successfully');
-      setIsAddWordModalOpen(false);
+      closeAddWordModal();
       setNewWord({ english: '', finnish: '', swedish: '', tags: '' });
       fetchWords();
     } catch (error) {
@@ -67,29 +75,11 @@ function Admin() {
     try {
       await updateWord(editWord.id, editWord);
       console.log('Word updated successfully');
-      setIsEditModalOpen(false);
+      closeEditModal();
       fetchWords();
     } catch (error) {
       console.error('Error updating word:', error);
     }
-  };
-
-  const openEditModal = (word) => {
-    setEditWord(word);
-    setIsEditModalOpen(true);
-  };
-
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-    setEditWord(null);
-  };
-
-  const openAddWordModal = () => {
-    setIsAddWordModalOpen(true);
-  };
-
-  const closeAddWordModal = () => {
-    setIsAddWordModalOpen(false);
   };
 
   const handleTagChange = (e) => {
