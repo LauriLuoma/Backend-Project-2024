@@ -14,6 +14,8 @@ function Navbar() {
 
   return (
     <nav style={{
+      position: 'fixed',
+      borderBottom: '2px solid #272727',
       padding: '10px',
       backgroundColor: '#333',
       color: '#fff',
