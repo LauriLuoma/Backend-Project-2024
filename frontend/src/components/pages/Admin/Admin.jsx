@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { addWord, deleteWord, getAllWords, updateWord } from '../../../api';
+import { filterWordsByTag, getUniqueTags } from '../../../utils/wordUtils';
 
 
 function Admin() {
@@ -95,11 +96,8 @@ function Admin() {
     setSelectedTag(e.target.value);
   };
 
-  const filteredWords = selectedTag
-    ? words.filter((word) => word.tags.split(',').map(tag => tag.trim()).includes(selectedTag))
-    : words;
-
-  const uniqueTags = [...new Set(words.flatMap((word) => word.tags.split(',').map(tag => tag.trim())))];
+  const filteredWords = filterWordsByTag(words, selectedTag);
+  const uniqueTags = getUniqueTags(words);
 
   return (
     <div className='container'>
@@ -107,9 +105,7 @@ function Admin() {
         <h1>Admin view</h1>
         <h3>Here you can add, edit and delete words</h3>
       </header>
-      <section>
         <button onClick={openAddWordModal}>Add New Word</button>
-      </section>
       {isAddWordModalOpen && (
         <div className="modal">
           <div className="modal-content">
