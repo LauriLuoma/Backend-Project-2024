@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllWords } from '../../../api';
+import { filterWordsByTag, getUniqueTags } from '../../../utils/wordUtils';
 
 function Learn() {
   const [words, setWords] = useState([]);
@@ -84,11 +85,8 @@ function Learn() {
     setIsPracticing(false);
   };
 
-  const filteredWords = selectedTag
-    ? words.filter((word) => word.tags.split(',').map(tag => tag.trim()).includes(selectedTag))
-    : words;
-
-  const uniqueTags = [...new Set(words.flatMap((word) => word.tags.split(',').map(tag => tag.trim())))];
+  const filteredWords = filterWordsByTag(words, selectedTag);
+  const uniqueTags = getUniqueTags(words);
 
   return (
     <div className='container'>
