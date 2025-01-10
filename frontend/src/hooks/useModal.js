@@ -4,6 +4,7 @@ const useModal = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddWordModalOpen, setIsAddWordModalOpen] = useState(false);
   const [editWord, setEditWord] = useState(null);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
   const openEditModal = (word) => {
     setEditWord(word);
@@ -23,15 +24,26 @@ const useModal = () => {
     setIsAddWordModalOpen(false);
   };
 
+  const openErrorModal = () => {
+    setIsErrorModalOpen(true);
+  }
+
+  const closeErrorModal = () => {
+    setIsErrorModalOpen(false);
+  }
+
   return {
     isEditModalOpen,
     isAddWordModalOpen,
+    isErrorModalOpen,
     editWord,
     setEditWord,
     openEditModal,
     closeEditModal,
     openAddWordModal,
     closeAddWordModal,
+    openErrorModal,
+    closeErrorModal,
   };
 };
 
