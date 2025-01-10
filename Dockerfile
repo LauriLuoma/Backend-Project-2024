@@ -42,4 +42,4 @@ COPY --from=frontend-builder /app/frontend/dist backend/public
 EXPOSE 3000
 
 # Start the backend server
-CMD ["npm", "start"]
+CMD ["npm", "start", "--workspace=backend"]
