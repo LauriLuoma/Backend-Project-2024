@@ -8,6 +8,7 @@ function Admin() {
   const [words, setWords] = useState([]);
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
   const [selectedTag, setSelectedTag] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const {
     isEditModalOpen,
     isAddWordModalOpen,
@@ -27,8 +28,10 @@ function Admin() {
     try {
       const words = await getAllWords();
       setWords(words);
+      setErrorMessage('');
     } catch (error) {
       console.error('Error fetching words:', error);
+      setErrorMessage('Error fetching words. Please try again later.');
     }
   };
 
@@ -45,8 +48,10 @@ function Admin() {
       closeAddWordModal();
       setNewWord({ english: '', finnish: '', swedish: '', tags: '' });
       fetchWords();
+      setErrorMessage('');
     } catch (error) {
       console.error('Error adding word:', error);
+      setErrorMessage('Error adding word. Please try again.');
     }
   };
 
@@ -60,8 +65,10 @@ function Admin() {
       await deleteWord(id);
       console.log('Word deleted successfully');
       fetchWords();
+      setErrorMessage('');
     } catch (error) {
       console.error('Error deleting word:', error);
+      setErrorMessage('Error deleting word. Please try again.');
     }
   };
 
@@ -77,8 +84,10 @@ function Admin() {
       console.log('Word updated successfully');
       closeEditModal();
       fetchWords();
+      setErrorMessage('');
     } catch (error) {
       console.error('Error updating word:', error);
+      setErrorMessage('Error updating word. Please try again.');
     }
   };
 
@@ -95,7 +104,8 @@ function Admin() {
         <h1>Admin view</h1>
         <h3>Here you can add, edit and delete words</h3>
       </header>
-        <button onClick={openAddWordModal}>Add New Word</button>
+      <button onClick={openAddWordModal}>Add New Word</button>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       {isAddWordModalOpen && (
         <div className="modal">
           <div className="modal-content">
