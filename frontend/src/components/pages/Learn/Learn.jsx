@@ -46,6 +46,12 @@ function Learn() {
     setUserTranslation(e.target.value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      checkTranslation();
+    }
+  }
+
   const checkTranslation = () => {
     const currentWord = randomizedWords[currentWordIndex];
     if (currentWord[selectedLanguage2].toLowerCase() === userTranslation.toLowerCase()) {
@@ -57,6 +63,7 @@ function Learn() {
       setIsCorrect(false);
     }
     setIsChecked(true);
+    setHasTried(true);
   };
 
   const tryAgain = () => {
@@ -140,6 +147,7 @@ function Learn() {
               type="text"
               value={userTranslation}
               onChange={handleTranslationChange}
+              onKeyDown={handleKeyDown}
               placeholder={`Translate to ${selectedLanguage2}`}
             />
             <div>
