@@ -118,14 +118,30 @@ function Admin() {
         <h3>Here you can add, edit and delete words</h3>
       </header>
       <button onClick={openAddWordModal}>Add New Word</button>
-      {isErrorModalOpen && (
-      <div className="modal">
-        <div className="modal-content">
-          <p className="error-message">{errorMessage}</p>
-          <button onClick={closeErrorModal}>Close</button>
-        </div>
-      </div>
-      )}
+      <section className='filter-tag'>
+        <h2>Filter words by tag/theme</h2>
+        <select value={selectedTag} onChange={handleTagChange}>
+          <option value="">All</option>
+          {uniqueTags.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
+      </section>
+      <h2>Words</h2>
+      <section className='words'>
+        {filteredWords.map((word) => (
+          <article key={word.id} className='word-box'>
+            <p>English: {word.english}</p>
+            <p>Finnish: {word.finnish}</p>
+            <p>Swedish: {word.swedish}</p>
+            <p>Tags: {word.tags}</p>
+            <button onClick={() => openEditModal(word)}>Edit</button>
+            <button onClick={() => handleDeleteWord(word.id)}>Delete</button>
+          </article>
+        ))}
+      </section>
       {isAddWordModalOpen && (
         <div className="modal">
           <div className="modal-content">
@@ -186,30 +202,14 @@ function Admin() {
           </div>
         </div>
       )}
-      <section className='filter-tag'>
-        <h2>Filter words by tag/theme</h2>
-        <select value={selectedTag} onChange={handleTagChange}>
-          <option value="">All</option>
-          {uniqueTags.map((tag) => (
-            <option key={tag} value={tag}>
-              {tag}
-            </option>
-          ))}
-        </select>
-      </section>
-      <h2>Words</h2>
-      <section className='words'>
-        {filteredWords.map((word) => (
-          <article key={word.id} className='word-box'>
-            <p>English: {word.english}</p>
-            <p>Finnish: {word.finnish}</p>
-            <p>Swedish: {word.swedish}</p>
-            <p>Tags: {word.tags}</p>
-            <button onClick={() => openEditModal(word)}>Edit</button>
-            <button onClick={() => handleDeleteWord(word.id)}>Delete</button>
-          </article>
-        ))}
-      </section>
+      {isErrorModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <p className="error-message">{errorMessage}</p>
+            <button onClick={closeErrorModal}>Close</button>
+          </div>
+        </div>
+      )}
       {isEditModalOpen && (
         <div className="modal">
           <div className="modal-content">
