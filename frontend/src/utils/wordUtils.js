@@ -14,4 +14,13 @@ const getUniqueTags = (words) => {
   return [...new Set(allTags)];
 };
 
-export { filterWordsByTag, getUniqueTags };
+const shuffleArray = (array) => {
+  const shuffledArray = [...array]
+  for (let currentIndex = shuffledArray.length - 1; currentIndex >= 0; currentIndex--) {
+    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+    [shuffledArray[currentIndex], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[currentIndex]];
+  }
+  return shuffledArray;
+}
+
+export { filterWordsByTag, getUniqueTags, shuffleArray };
