@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllWords } from '../../../api';
-import { filterWordsByTag, getUniqueTags } from '../../../utils/wordUtils';
+import { filterWordsByTag, getUniqueTags, shuffleArray } from '../../../utils/wordUtils';
 import Footer from '../../Footer/Footer';
 
 function Learn() {
@@ -15,6 +15,7 @@ function Learn() {
   const [score, setScore] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
   const [hasTried, setHasTried] = useState(false);
+  const [randomizedWords, setRandomizedWords] = useState([]);
 
   useEffect(() => {
     fetchWords();
@@ -46,7 +47,7 @@ function Learn() {
   };
 
   const checkTranslation = () => {
-    const currentWord = filteredWords[currentWordIndex];
+    const currentWord = randomizedWords[currentWordIndex];
     if (currentWord[selectedLanguage2].toLowerCase() === userTranslation.toLowerCase()) {
       setIsCorrect(true);
       if (!hasTried) {
@@ -74,6 +75,9 @@ function Learn() {
   };
 
   const startPractice = () => {
+    const filteredWords = filterWordsByTag(words, selectedTag);
+    const shuffledWords = shuffleArray(filteredWords);
+    setRandomizedWords(shuffledWords);
     setIsPracticing(true);
     setCurrentWordIndex(0);
     setUserTranslation('');
@@ -127,10 +131,10 @@ function Learn() {
         </section>
         <p>Words translated correctly on first try: {score}</p>
         <button onClick={startPractice} disabled={isPracticing}>Start Practice</button>
-        {isPracticing && filteredWords.length > 0 && (
+        {isPracticing && randomizedWords.length > 0 && (
           <section className='practice-container'>
             <p>
-              Translate the word: <strong>{filteredWords[currentWordIndex][selectedLanguage1]}</strong>
+              Translate the word: <strong>{randomizedWords[currentWordIndex][selectedLanguage1]}</strong>
             </p>
             <input
               type="text"
