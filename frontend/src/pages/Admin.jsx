@@ -12,12 +12,15 @@ function Admin() {
   const {
     isEditModalOpen,
     isAddWordModalOpen,
+    isErrorModalOpen,
     editWord,
     setEditWord,
     openEditModal,
     closeEditModal,
     openAddWordModal,
     closeAddWordModal,
+    openErrorModal,
+    closeErrorModal,
   } = useModal();
 
   useEffect(() => {
@@ -31,7 +34,6 @@ function Admin() {
       setErrorMessage('');
     } catch (error) {
       console.error('Error fetching words:', error);
-      setErrorMessage('Error fetching words. Please try again later.');
     }
   };
 
@@ -44,14 +46,16 @@ function Admin() {
     e.preventDefault();
     try {
       await addWord(newWord);
-      console.log('Word added successfully');
       closeAddWordModal();
+      console.log('Word added successfully');
       setNewWord({ english: '', finnish: '', swedish: '', tags: '' });
       fetchWords();
       setErrorMessage('');
     } catch (error) {
       console.error('Error adding word:', error);
       setErrorMessage('Error adding word. Please try again.');
+      closeAddWordModal();
+      openErrorModal();
     }
   };
 
@@ -69,6 +73,7 @@ function Admin() {
     } catch (error) {
       console.error('Error deleting word:', error);
       setErrorMessage('Error deleting word. Please try again.');
+      openErrorModal();
     }
   };
 
@@ -88,6 +93,8 @@ function Admin() {
     } catch (error) {
       console.error('Error updating word:', error);
       setErrorMessage('Error updating word. Please try again.');
+      closeEditModal();
+      openErrorModal();
     }
   };
 
@@ -105,7 +112,14 @@ function Admin() {
         <h3>Here you can add, edit and delete words</h3>
       </header>
       <button onClick={openAddWordModal}>Add New Word</button>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {isErrorModalOpen && (
+      <div className="modal">
+        <div className="modal-content">
+          <p className="error-message">{errorMessage}</p>
+          <button onClick={closeErrorModal}>Close</button>
+        </div>
+      </div>
+      )}
       {isAddWordModalOpen && (
         <div className="modal">
           <div className="modal-content">
