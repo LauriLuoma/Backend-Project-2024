@@ -9,10 +9,12 @@ function Admin() {
   const [newWord, setNewWord] = useState({english: '', finnish: '', swedish: '', tags: ''});
   const [selectedTag, setSelectedTag] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [deleteWordId, setDeleteWordId] = useState(null);
   const {
     isEditModalOpen,
     isAddWordModalOpen,
     isErrorModalOpen,
+    isDeleteModalOpen,
     editWord,
     setEditWord,
     openEditModal,
@@ -21,6 +23,8 @@ function Admin() {
     closeAddWordModal,
     openErrorModal,
     closeErrorModal,
+    openDeleteModal,
+    closeDeleteModal,
   } = useModal();
 
   useEffect(() => {
@@ -59,20 +63,22 @@ function Admin() {
     }
   };
 
-  const handleDeleteWord = async (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this word?');
-    if (!confirmed) {
-      return;
-    }
+  const handleDeleteWord = (id) => {
+    setDeleteWordId(id);
+    openDeleteModal();
+  };
 
+  const confirmDeleteWord = async () => {
     try {
-      await deleteWord(id);
+      await deleteWord(deleteWordId);
+      closeDeleteModal();
       console.log('Word deleted successfully');
       fetchWords();
       setErrorMessage('');
     } catch (error) {
       console.error('Error deleting word:', error);
       setErrorMessage('Error deleting word. Please try again.');
+      closeDeleteModal();
       openErrorModal();
     }
   };
@@ -261,6 +267,16 @@ function Admin() {
               <button type="submit">Save Changes</button>
               <button type="button" onClick={closeEditModal}>Cancel</button>
             </form>
+          </div>
+        </div>
+      )}
+      {isDeleteModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Confirm Action</h2>
+            <p>Are you sure you want to delete this word?</p>
+            <button type='button' onClick={confirmDeleteWord}>Yes</button>
+            <button type='button' onClick={() => {closeDeleteModal(); setDeleteWordId(null)}}>No</button>
           </div>
         </div>
       )}
