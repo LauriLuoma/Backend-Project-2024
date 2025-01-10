@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { addWord, deleteWord, getAllWords, updateWord } from '../../../api';
 import { filterWordsByTag, getUniqueTags } from '../../../utils/wordUtils';
 import useModal from '../../../hooks/useModal';
-import Footer from '../../Footer/Footer';
 
 
 function Admin() {
@@ -241,7 +240,6 @@ function Admin() {
           </div>
         </div>
       )}
-      <Footer />
     </div>
   );
 }
