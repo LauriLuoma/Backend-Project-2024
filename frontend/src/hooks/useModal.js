@@ -5,6 +5,7 @@ const useModal = () => {
   const [isAddWordModalOpen, setIsAddWordModalOpen] = useState(false);
   const [editWord, setEditWord] = useState(null);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const openEditModal = (word) => {
     setEditWord(word);
@@ -32,10 +33,19 @@ const useModal = () => {
     setIsErrorModalOpen(false);
   }
 
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  }
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  }
+
   return {
     isEditModalOpen,
     isAddWordModalOpen,
     isErrorModalOpen,
+    isDeleteModalOpen,
     editWord,
     setEditWord,
     openEditModal,
@@ -44,6 +54,8 @@ const useModal = () => {
     closeAddWordModal,
     openErrorModal,
     closeErrorModal,
+    openDeleteModal,
+    closeDeleteModal,
   };
 };
 
