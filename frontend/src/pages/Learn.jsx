@@ -255,7 +255,7 @@ function Learn() {
             {isCorrect !== null && (
               <div>
                 {/* Display the result of the translation check */}
-                <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${filteredWords[currentWordIndex][selectedLanguage2]}`}</p>
+                <p>{isCorrect ? 'Correct!' : `Incorrect! The correct translation is ${randomizedWords[currentWordIndex][selectedLanguage2]}`}</p>
                 {/* Button to try the translation again if incorrect */}
                 {!isCorrect && <button onClick={tryAgain}>Try Again</button> }
               </div>
