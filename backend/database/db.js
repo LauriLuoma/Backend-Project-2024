@@ -1,9 +1,14 @@
-/** This is a simple database for the "Learn Words"-app" */
+/**
+ * This is a simple database for the "Learn Words" app.
+ * It uses SQLite to store words in different languages along with their tags.
+ */
 
-// Importing the necessary modules
 const sqlite3 = require("sqlite3").verbose();
 
-// Creating a new SQLite database in memory
+/**
+ * Creating a new SQLite database in memory.
+ * @type {sqlite3.Database}
+ */
 const db = new sqlite3.Database(":memory:", (err) => {
   if (err) {
     return console.error(
@@ -13,8 +18,14 @@ const db = new sqlite3.Database(":memory:", (err) => {
   }
   console.log("Connected to the in-memory SQlite database.");
 
-  // Creating a new table called "words" with columns for English, Finnish, Swedish and tags
+  /**
+   * Creating a new table called "words" with columns for English, Finnish, Swedish and tags.
+   */
   db.serialize(() => {
+    /**
+     * SQL query to create the "words" table if it does not exist.
+     * The table has columns for id, english, finnish, swedish, and tags.
+     */
     db.run(
       `CREATE TABLE IF NOT EXISTS words (
       id INTEGER PRIMARY KEY,
@@ -31,7 +42,9 @@ const db = new sqlite3.Database(":memory:", (err) => {
       },
     );
 
-    // Inserting some base data into the table
+    /**
+     * Insert some base data into the table.
+     */
     const stmt = db.prepare(
       "INSERT INTO words (english, finnish, swedish, tags) VALUES (?, ?, ?, ?)",
     );
