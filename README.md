@@ -14,7 +14,7 @@ The motivation behind this project is to learn more about making applications, m
 
 ## Screenshots
 ![Screenshot of the main page of Learn words! app](screenshots/learnPage.png?raw=true)
-![Screenshot of the admin view where user can manage the words](screenshots/adminPage.pngraw=true)
+![Screenshot of the admin view where user can manage the words](screenshots/adminPage.png?raw=true)
 
 ## Tech/Framework Used
 Built with:
@@ -52,9 +52,9 @@ The application has a few limitations:
   - The admin view lacks authentication, allowing anyone to access and edit the words.
 
 ## Links
-Screencast:
-Render.com link: https://backend-project-2024-19a6.onrender.com/
-Repository link: https://github.com/LauriLuoma/Backend-Project-2024
+- Screencast:
+- Render.com link: https://backend-project-2024-19a6.onrender.com/
+- Repository link: https://github.com/LauriLuoma/Backend-Project-2024
 
 ## License
 MIT © Lauri Luoma
