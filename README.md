@@ -52,7 +52,7 @@ The application has a few limitations:
   - The admin view lacks authentication, allowing anyone to access and edit the words.
 
 ## Links
-- Screencast:
+- Screencast: https://www.youtube.com/watch?v=LN2Lo1QXhJ4
 - Render.com link: https://backend-project-2024-19a6.onrender.com/
 - Repository link: https://github.com/LauriLuoma/Backend-Project-2024
 
